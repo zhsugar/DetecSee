@@ -12,7 +12,7 @@ DetecSee 是一个基于安卓平台的目标检测识别应用，能够实时�
 
 ## 演示视频
 
-![DetecSee 演示视频](https://github.com/user-attachments/assets/9f41d15b-cab7-4fbf-9556-76a5e247956e)
+![DetecSee 演示视频](https://github.com/user-attachments/assets/39ede45b-0a46-48c3-9b10-76995e78daa8)
 
 ## 技术栈
 
