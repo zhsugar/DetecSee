@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- 优化后的顶部控制栏 - 现在只有一行 -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/topControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#2203DAC6"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp">
+
+            <!-- 摄像头切换按钮 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSwitchCamera"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="切换"
+                android:textColor="#03DAC6"
+                app:icon="@drawable/ic_camera_switch"
+                app:iconTint="#03DAC6"
+                app:strokeColor="#03DAC6"
+                app:strokeWidth="1dp" />
+
+            <!-- 添加间隔 -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="#333333" />
+
+            <!-- 模型选择 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="模型"
+                    android:textColor="#03DAC6"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"/>
+
+                <Spinner
+                    android:id="@+id/spinnerModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="32dp"
+                    android:textColor="#03DAC6"
+                    android:textSize="14sp"
+                    android:backgroundTint="#03DAC6"
+                    android:entries="@array/model_array"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSelectedModel"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="yolov8n"
+                    android:textColor="#BBBBBB"
+                    app:chipBackgroundColor="#222222"
+                    app:chipStrokeColor="#03DAC6"
+                    app:chipStrokeWidth="1dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="false"
+                    android:checkable="false"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <!-- 添加间隔 -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="#333333" />
+
+            <!-- 设备选择 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设备"
+                    android:textColor="#03DAC6"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"/>
+
+                <Spinner
+                    android:id="@+id/spinnerCPUGPU"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="32dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:backgroundTint="#03DAC6"
+                    android:entries="@array/cpugpu_array"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSelectedDevice"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CPU"
+                    android:textColor="#BBBBBB"
+                    app:chipBackgroundColor="#222222"
+                    app:chipStrokeColor="#03DAC6"
+                    app:chipStrokeWidth="1dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="false"
+                    android:checkable="false"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 相机预览区域 -->
+    <SurfaceView
+        android:id="@+id/cameraview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topControls"
+        app:layout_constraintBottom_toTopOf="@id/bottomControls"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 底部控制栏 -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
