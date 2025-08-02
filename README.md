@@ -1,84 +1,89 @@
-# DetecSee - 安卓目标检测识别应用
+# DetecSee
 
-DetecSee 是一个基于安卓平台的目标检测识别应用，能够实时识别摄像头画面中的物体并提供准确的检测结果。
+DetecSee 是一个基于 NCNN 和 OpenCV 的 Android 目标检测应用，集成了 YOLOv8 模型，支持多种平台架构。
 
-## 功能特性
+## 项目简介
 
-- 📱 **实时目标检测**：利用设备摄像头进行实时物体识别
-- 🎨 **直观界面**：用户界面设计
-- 📊 **结果展示**：可视化检测框和置信度分数
+DetecSee 旨在为 Android 设备提供高效的目标检测能力，利用 NCNN 推理引擎和 OpenCV 图像处理库，支持多种主流移动端硬件架构。项目内置 YOLOv8n 和 YOLOv8s 两种模型，适用于不同性能需求。
 
-## 演示视频
+## 项目演示
 
 ![DetecSee 演示视频](https://github.com/user-attachments/assets/39ede45b-0a46-48c3-9b10-76995e78daa8)
-
-## 技术栈
-
-- **开发语言**：Java/C++
-- **目标检测模型**：YOLO 
-- **UI框架**： XML Layout
-- **最低支持版本**：Android 7.0 (API 24)
-
-## 安装指南
-
-### 环境要求
-- Android Studio Arctic Fox 或更高版本
-- Android SDK 24 或更高版本
-- 至少 2GB RAM 的设备
-
-### 构建步骤
-
-1. **克隆项目**
-   ```bash
-   git clone [项目仓库地址]
-   cd DetecSee
-   ```
-
-2. **打开项目**
-   - 在 Android Studio 中打开项目
-   - 等待 Gradle 同步完成
-
-3. **配置模型**
-   - 将训练好的模型文件放入 `app/src/main/assets/` 目录
-   - 确保模型文件名与代码中引用的一致
-
-4. **构建并运行**
-   - 连接安卓设备或启动模拟器
-   - 点击 "Run" 按钮构建并安装应用
-
-## 使用说明
-
-1. **启动应用**：点击应用图标启动 DetecSee
-2. **权限授权**：授予相机权限以使用目标检测功能
-3. **开始检测**：将摄像头对准想要识别的物体
-4. **查看结果**：应用会实时显示检测到的物体和置信度
 
 ## 项目结构
 
 ```
-DetecSee/
-├── app/
-│   ├── src/main/
-│   │   ├── java/com/detecsee/      # 主要代码
-│   │   ├── res/                      # 资源文件
-│   │   └── assets/                   # 模型文件
-│   └── build.gradle.kts             # 应用级构建配置
-├── build.gradle.kts                   # 项目级构建配置
-├── gradle.properties                 # Gradle 配置
-└── settings.gradle.kts               # 项目设置
+app/
+├── build.gradle.kts                # App 构建配置
+├── src/
+│   ├── main/
+│   │   ├── AndroidManifest.xml     # Android 清单文件
+│   │   ├── assets/                 # 模型文件
+│   │   │   ├── yolov8n.bin
+│   │   │   ├── yolov8n.param
+│   │   │   ├── yolov8s.bin
+│   │   │   ├── yolov8s.param
+│   │   ├── java/
+│   │   │   └── sugar/me/detecsee/  # Java 源码
+│   │   │       ├── MainActivity.java
+│   │   │       ├── Yolov8Ncnn.java
+│   │   ├── jni/                    # C++ 源码与第三方库
+│   │   │   ├── ncnn-20250503-android-vulkan-shared/
+│   │   │   ├── opencv-mobile-4.9.0-android/
+│   │   │   ├── ndkcamera.cpp
+│   │   │   ├── ndkcamera.h
+│   │   │   ├── yolo.cpp
+│   │   │   ├── yolo.h
+│   │   │   ├── yolov8ncnn.cpp
+│   │   ├── res/                    # 资源文件
+│   │   │   ├── layout/
+│   │   │   ├── drawable/
+│   │   │   ├── mipmap-*/
+│   │   │   ├── values/
+│   │   │   ├── xml/
+├── proguard-rules.pro              # 混淆规则
+├── ...
 ```
 
-## 常见问题
+## 主要功能
 
-**Q: 应用启动后立即崩溃**
-A: 请检查是否正确放置了模型文件，并确认设备支持 Camera2 API。
+- 基于 NCNN 推理引擎，支持多平台（arm64-v8a, armeabi-v7a, x86, x86_64, riscv64）
+- 集成 OpenCV 进行图像处理
+- 支持 YOLOv8n、YOLOv8s 目标检测模型
+- Android 原生相机采集与推理
 
-**Q: 检测精度不够高**
-A: 尝试在光线充足的环境下使用，或考虑使用更高精度的模型。
+## 快速开始
 
-**Q: 检测速度较慢**
-A: 在设置中启用 GPU 加速，或降低输入图像分辨率。
+1. **环境准备**
+- 安装 Android Studio
+- 配置 NDK 和 CMake
+
+2. **克隆项目**
+   ```bash
+   git clone https://github.com/zhsugar/DetecSee.git
+   cd PixelNet
+   ```
+
+3. **用 Android Studio 打开项目**
+
+4. **编译并运行**
+   - 连接 Android 设备或启动模拟器
+   - 点击运行按钮
+
+## 依赖
+
+- [ncnn](https://github.com/Tencent/ncnn)
+- [OpenCV-Android](https://opencv.org/releases/)
+- YOLOv8 模型（已包含在 assets/ 目录）
+
+## 目录说明
+
+- `app/src/main/java/`：Java 代码，包含主界面和 NCNN 调用逻辑
+- `app/src/main/jni/`：C++ 代码，包含 NCNN、OpenCV 相关实现
+- `app/src/main/assets/`：模型文件
+- `app/src/main/res/`：资源文件（布局、图片等）
 
 ## 贡献指南
 
 欢迎提交 Issue 和 Pull Request 来帮助改进 DetecSee！
+
